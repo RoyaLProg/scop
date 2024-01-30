@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <iostream>
 
 int main() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -18,8 +19,14 @@ int main() {
         return 1;
     }
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+	SDL_RenderClear(renderer);
+	
+	SDL_Rect rect = {.x = 5, .y = 10, .w = 100, .h = 100};
+	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+	if (SDL_RenderDrawRect(renderer, &rect))
+		std::cout << "error" << std::endl;
     SDL_RenderPresent(renderer);
 
     SDL_Delay(2000); // Wait for 2 seconds
