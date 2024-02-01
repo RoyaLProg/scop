@@ -1,38 +1,66 @@
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "../includes/types.hpp"
 
 int main() {
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        printf("SDL_Init Error: %s\n", SDL_GetError());
-        return 1;
-    }
+	Screen screen;
 
-    SDL_Window* window = SDL_CreateWindow("Hello SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
-    if (window == NULL) {
-        printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
-        return 1;
-    }
+	if ( screen.getFailed() )
+		return false;
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if (renderer == NULL) {
-        printf("SDL_CreateRenderer Error: %s\n", SDL_GetError());
-        return 1;
-    }
+	std::vector<vec3> points;
+	points.emplace_back( 100, 100, 100 ), points.emplace_back( 200, 100, 100 ),
+	    points.emplace_back( 200, 200, 100 ),
+	    points.emplace_back( 100, 200, 100 ),
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	    points.emplace_back( 100, 100, 200 ),
+	    points.emplace_back( 200, 100, 200 ),
+	    points.emplace_back( 100, 200, 200 ),
+	    points.emplace_back( 200, 200, 200 );
 
-	SDL_RenderClear(renderer);
-	
-	SDL_Rect rect = {.x = 5, .y = 10, .w = 100, .h = 100};
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-	if (SDL_RenderDrawRect(renderer, &rect))
-		std::cout << "error" << std::endl;
-    SDL_RenderPresent(renderer);
+	vec3 c( 0, 0, 0 );
 
-    SDL_Delay(2000); // Wait for 2 seconds
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+	for ( vec3& point : points ) {
+		c.x += point.x;
+		c.y += point.y;
+		c.z += point.z;
+	}
 
-    return 0;
+	c.x /= points.size();
+	c.y /= points.size();
+	c.z /= points.size();
+
+	std::vector<connection> connections;
+	connections.push_back( { .a = 0, .b = 4} ),
+	connections.push_back( { .a = 1, .b = 5} ),
+	connections.push_back( { .a = 2, .b = 6} ),
+	connections.push_back( { .a = 3, .b = 7} );
+
+	while ( true ) {
+		for ( vec3& point : points ) {
+			point.x -= c.x;
+			point.y -= c.y;
+			point.z -= c.z;
+
+			point.rotate( 0.002f, 0.001f, 0.004f );
+
+			point.x += c.x;
+			point.y += c.y;
+			point.z += c.z;
+
+			screen.pixel( point.x, point.y );
+		}
+
+		for ( struct connection& c : connections )
+		{
+			screen.line( points[c.a].x, points[c.a].y, points[c.b].x,
+			      points[c.b].y );
+		}
+
+		screen.show();
+		screen.clear();
+		screen.input();
+	}
+
+	return 0;
 }

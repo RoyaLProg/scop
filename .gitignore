@@ -1,2 +1,6 @@
 .obj/*
 scop
+*.obj
+*.o
+.clang-format
+.vscode
