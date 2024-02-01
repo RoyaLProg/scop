@@ -12,13 +12,11 @@ LDFLAGS= -I/usr/include/SDL2 -D_REENTRANT -lSDL2
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(LDFLAGS) -o $(NAME) $(SRCS)
+	$(CXX) -o $(NAME) $(OBJS) $(LDFLAGS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp
 	if !(test -d $(OBJS_DIR)); then mkdir -p $(OBJS_DIR); fi
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
-
-.PHONY: clean fclean re
 
 clean:
 	rm -f $(OBJS)
@@ -26,4 +24,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re : fclean all
+
+.PHONY: fclean clean all
