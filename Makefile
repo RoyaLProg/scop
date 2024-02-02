@@ -3,6 +3,7 @@ CXX=c++
 OBJS_DIR=.obj
 SRCS_DIR=sources
 _SRCS=main.cpp\
+		types/connection.cpp\
 		types/screen.cpp\
 		types/vec3.cpp
 _OBJS=$(_SRCS:.cpp=.o)

@@ -2,32 +2,44 @@
 #include "../../includes/types.hpp"
 
 Screen::Screen() {
+
+	_failed = false;
 	if ( SDL_Init( SDL_INIT_VIDEO ) )
-		goto failed;
+	{
+		std::cout << "Screen initialisation failed : " << SDL_GetError() << " \n";
+		_failed = true;
+	}
 	if ( SDL_CreateWindowAndRenderer( 640 * 2, 480 * 2, 0, &window,
 	                                  &renderer ) )
-		goto failed;
+	{
+		std::cout << "Screen window initialisation failed : " << SDL_GetError() << " \n";
+		_failed = true;
+	}
 	if ( SDL_RenderSetScale( renderer, 2, 2 ) )
-		goto failed;
+	{
+		std::cout << "Screen scale initialisation failed : " << SDL_GetError() << " \n";
+		_failed = true;	
+	}
 
-	goto end;
-
-failed:
-	std::cout << "Screen initialisation failed : " << SDL_GetError() << " \n";
-	_failed = true;
-
-end:
 	return;
 }
 
 void Screen::pixel( float x, float y ) {
-	SDL_FPoint p = { .x = x, .y = y };
-
-	points.emplace_back( p );
+	points.emplace_back( x, y, 0.0 );
 }
 
-void Screen::line( float x1, float y1, float x2, float y2 ) {
-	SDL_RenderDrawLineF( renderer, x1, y1, x2, y2 );
+void Screen::line( Connection &c ) {
+	lines.push_back(c);
+}
+
+void Screen::line( const Connection &c ) {
+	lines.push_back(c);
+}
+
+void Screen::line( int a, int b ) {
+	Connection c(a, b);
+
+	lines.push_back(c);
 }
 
 void Screen::show() {
@@ -35,8 +47,14 @@ void Screen::show() {
 	SDL_RenderClear( renderer );
 
 	SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
-	SDL_RenderDrawPointsF( renderer, points.data(), points.size() );
+
+	std::cout << "lines : " << lines.size() << " points : " << points.size() << "\n";
+	
+	for (Connection &c : lines)
+		SDL_RenderDrawLineF(renderer, points[c.a].x, points[c.a].y, points[c.b].x, points[c.b].y);
+
 	SDL_RenderPresent( renderer );
+	// SDL_Delay(1000);
 }
 
 void Screen::input() {
@@ -52,6 +70,7 @@ void Screen::input() {
 
 void Screen::clear() {
 	points.clear();
+	lines.clear();
 }
 
 SDL_Event Screen::getEvent() {
@@ -66,4 +85,12 @@ SDL_Renderer* Screen::getRenderer() {
 
 bool Screen::getFailed() {
 	return _failed;
+}
+
+std::vector<vec3>& Screen::getPoints() {
+	return points;
+}
+
+std::vector<Connection>& Screen::getLines() {
+	return lines;
 }

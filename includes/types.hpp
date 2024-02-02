@@ -4,30 +4,11 @@
 #include <SDL2/SDL.h>
 #include <vector>
 
-class Screen {
-   private:
-	SDL_Event               e;
-	SDL_Window*             window;
-	SDL_Renderer*           renderer;
-	std::vector<SDL_FPoint> points;
-
-	bool _failed;
-
+class Connection {
    public:
-	SDL_Event     getEvent();
-	SDL_Window*   getWindow();
-	SDL_Renderer* getRenderer();
-	bool          getFailed();
+	int a, b;
 
-	std::vector<SDL_FPoint> getPoints();
-
-	Screen();
-	void pixel( float x, float y );
-	void line( float x1, float y1, float x2, float y2 );
-	void show();
-	void input();
-	void clear();
-	// void	line();
+	Connection( int a = 0, int b = 0 );
 };
 
 class vec3 {
@@ -40,16 +21,51 @@ class vec3 {
 	float x, y, z;
 };
 
+class Object {
+	std::vector<vec3>       points;
+	std::vector<Connection> lines;
+
+	std::vector<vec3>&       getPoints();
+	std::vector<Connection>& getLines();
+
+	Object();
+};
+
+class Screen {
+   private:
+	SDL_Event               e;
+	SDL_Window*             window;
+	SDL_Renderer*           renderer;
+	std::vector<vec3>       points;
+	std::vector<Connection> lines;
+
+	bool _failed;
+
+   public:
+	SDL_Event     getEvent();
+	SDL_Window*   getWindow();
+	SDL_Renderer* getRenderer();
+	bool          getFailed();
+
+	std::vector<vec3>&       getPoints();
+	std::vector<Connection>& getLines();
+
+	Screen();
+	void pixel( float x, float y );
+	void line( Connection& c );
+	void line( const Connection& c );
+	void line( int a, int b );
+	void show();
+	void input();
+	void clear();
+};
+
 class Vertex {
 	float x, y, z, w;
 };
 
 class textureCoods {
 	float u, v, w;
-};
-
-struct connection {
-	int a, b;
 };
 
 #endif
