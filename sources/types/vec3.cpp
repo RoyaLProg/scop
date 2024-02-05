@@ -13,15 +13,17 @@ vec3::vec3(float x, float y, float z) {
 void vec3::rotate(float x, float y, float z) {
 	float rad = 0;
 
+	// float tempx, tempy, tempz;
+
 	rad = x;
 	this->y = std::cos(rad) * this->y - std::sin(rad) * this->z;
-	this->z = std::sin(rad) * this->y - std::cos(rad) * this->z; 
+	this->z = std::sin(rad) * this->y + std::cos(rad) * this->z; 
 
 	rad = y;
-	this->x = std::cos(rad) * this->x - std::sin(rad) * this->z;
-	this->z = -std::sin(rad) * this->x - std::cos(rad) * this->z;
+	this->x = std::cos(rad) * this->x + std::sin(rad) * this->z;
+	this->z = -std::sin(rad) * this->x + std::cos(rad) * this->z;
 
 	rad = z;
 	this->x = std::cos(rad) * this->x - std::sin(rad) * this->y;
-	this->y = std::sin(rad) * this->x - std::cos(rad) * this->y;
+	this->y = std::sin(rad) * this->x + std::cos(rad) * this->y;
 }
