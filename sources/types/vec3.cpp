@@ -11,19 +11,14 @@ vec3::vec3(float x, float y, float z) {
 }
 
 void vec3::rotate(float x, float y, float z) {
-	float rad = 0;
 
-	// float tempx, tempy, tempz;
+	//rotate the point around the x y and z axis
 
-	rad = x;
-	this->y = std::cos(rad) * this->y - std::sin(rad) * this->z;
-	this->z = std::sin(rad) * this->y + std::cos(rad) * this->z; 
+	float x1 = this->x;
+	float y1 = this->y;
+	float z1 = this->z;
 
-	rad = y;
-	this->x = std::cos(rad) * this->x + std::sin(rad) * this->z;
-	this->z = -std::sin(rad) * this->x + std::cos(rad) * this->z;
-
-	rad = z;
-	this->x = std::cos(rad) * this->x - std::sin(rad) * this->y;
-	this->y = std::sin(rad) * this->x + std::cos(rad) * this->y;
+	this->x = x1 * cos(y) * cos(z) - y1 * cos(y) * sin(z) + z1 * sin(y);
+	this->y = x1 * (cos(x) * sin(z) + sin(x) * sin(y) * cos(z)) + y1 * (cos(x) * cos(z) - sin(x) * sin(y) * sin(z)) - z1 * sin(x) * cos(y);
+	this->z = x1 * (sin(x) * sin(z) - cos(x) * sin(y) * cos(z)) + y1 * (sin(x) * cos(z) + cos(x) * sin(y) * sin(z)) + z1 * cos(x) * cos(y);
 }
