@@ -48,7 +48,7 @@ void Screen::show() {
 
 	SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
 
-	std::cout << "lines : " << lines.size() << " points : " << points.size() << "\n";
+	// std::cout << "lines : " << lines.size() << " points : " << points.size() << "\n";
 	
 	for (Connection &c : lines)
 		SDL_RenderDrawLineF(renderer, points[c.a].x, points[c.a].y, points[c.b].x, points[c.b].y);
