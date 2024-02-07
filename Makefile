@@ -30,3 +30,6 @@ fclean: clean
 re : fclean all
 
 .PHONY: fclean clean all
+
+format:
+	find . -iname "*.hpp" -o -iname "*.cpp" | xargs clang-format -i
