@@ -2,23 +2,22 @@
 #include "../../includes/types.hpp"
 
 Screen::Screen() {
-
 	_failed = false;
-	if ( SDL_Init( SDL_INIT_VIDEO ) )
-	{
-		std::cout << "Screen initialisation failed : " << SDL_GetError() << " \n";
+	if ( SDL_Init( SDL_INIT_VIDEO ) ) {
+		std::cout << "Screen initialisation failed : " << SDL_GetError()
+		          << " \n";
 		_failed = true;
 	}
 	if ( SDL_CreateWindowAndRenderer( 640 * 2, 480 * 2, 0, &window,
-	                                  &renderer ) )
-	{
-		std::cout << "Screen window initialisation failed : " << SDL_GetError() << " \n";
+	                                  &renderer ) ) {
+		std::cout << "Screen window initialisation failed : " << SDL_GetError()
+		          << " \n";
 		_failed = true;
 	}
-	if ( SDL_RenderSetScale( renderer, 2, 2 ) )
-	{
-		std::cout << "Screen scale initialisation failed : " << SDL_GetError() << " \n";
-		_failed = true;	
+	if ( SDL_RenderSetScale( renderer, 2, 2 ) ) {
+		std::cout << "Screen scale initialisation failed : " << SDL_GetError()
+		          << " \n";
+		_failed = true;
 	}
 
 	return;
@@ -28,18 +27,18 @@ void Screen::pixel( float x, float y ) {
 	points.emplace_back( x, y, 0.0 );
 }
 
-void Screen::line( Connection &c ) {
-	lines.push_back(c);
+void Screen::line( Connection& c ) {
+	lines.push_back( c );
 }
 
-void Screen::line( const Connection &c ) {
-	lines.push_back(c);
+void Screen::line( const Connection& c ) {
+	lines.push_back( c );
 }
 
 void Screen::line( int a, int b ) {
-	Connection c(a, b);
+	Connection c( a, b );
 
-	lines.push_back(c);
+	lines.push_back( c );
 }
 
 void Screen::show() {
@@ -48,10 +47,13 @@ void Screen::show() {
 
 	SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
 
-	// std::cout << "lines : " << lines.size() << " points : " << points.size() << "\n";
-	
-	for (Connection &c : lines)
-		SDL_RenderDrawLineF(renderer, points[c.a].x, points[c.a].y, points[c.b].x, points[c.b].y);
+	// std::cout << "lines : " << lines.size() << " points : " << points.size()
+	// <<
+	// "\n";
+
+	for ( Connection& c : lines )
+		SDL_RenderDrawLineF( renderer, points[c.a].x, points[c.a].y,
+		                     points[c.b].x, points[c.b].y );
 
 	SDL_RenderPresent( renderer );
 	// SDL_Delay(1000);
