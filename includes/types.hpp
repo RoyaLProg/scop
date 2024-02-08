@@ -2,6 +2,7 @@
 #define TYPES_HPP
 
 #include <SDL2/SDL.h>
+#include <string>
 #include <vector>
 
 class Connection {
@@ -25,10 +26,27 @@ class Object {
 	std::vector<vec3>       points;
 	std::vector<Connection> lines;
 
+   public:
 	std::vector<vec3>&       getPoints();
 	std::vector<Connection>& getLines();
 
 	Object();
+};
+
+class ObjectBuilder {
+	Object* o;
+
+	int addPoint( std::vector<std::string> args );
+	int addLine( std::vector<std::string> args );
+	int addTextureCood( std::vector<std::string> args );
+	int addNormal( std::vector<std::string> args );
+
+   public:
+	~ObjectBuilder();
+	ObjectBuilder();
+
+	int    build( std::string path );
+	Object getObject();
 };
 
 class Screen {
@@ -51,6 +69,7 @@ class Screen {
 	std::vector<Connection>& getLines();
 
 	Screen();
+
 	void pixel( float x, float y );
 	void line( Connection& c );
 	void line( const Connection& c );
