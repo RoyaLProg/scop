@@ -52,7 +52,7 @@ int main() {
 			point.y -= c.y;
 			point.z -= c.z;
 
-			point.rotate( 0.0f, 0.0f, 0.05f );
+			point.rotate( 0.05f, 0.0f, 0.05f );
 
 			point.x += c.x;
 			point.y += c.y;
