@@ -25,10 +25,14 @@ class vec3 {
 class Object {
 	std::vector<vec3>       points;
 	std::vector<Connection> lines;
+	std::vector<vec3>       textureCoods;
+	std::vector<vec3>       normals;
 
    public:
 	std::vector<vec3>&       getPoints();
 	std::vector<Connection>& getLines();
+	std::vector<vec3>&       getTextureCoods();
+	std::vector<vec3>&       getNormals();
 
 	Object();
 };
