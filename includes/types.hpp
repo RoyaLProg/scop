@@ -23,16 +23,16 @@ class vec3 {
 };
 
 class Object {
-	std::vector<vec3>       points;
+	std::vector<vec3>		points;
 	std::vector<Connection> lines;
-	std::vector<vec3>       textureCoods;
-	std::vector<vec3>       normals;
+	std::vector<vec3>		textureCoods;
+	std::vector<vec3>		normals;
 
    public:
-	std::vector<vec3>&       getPoints();
+	std::vector<vec3>&		 getPoints();
 	std::vector<Connection>& getLines();
-	std::vector<vec3>&       getTextureCoods();
-	std::vector<vec3>&       getNormals();
+	std::vector<vec3>&		 getTextureCoods();
+	std::vector<vec3>&		 getNormals();
 
 	Object();
 };
@@ -49,27 +49,27 @@ class ObjectBuilder {
 	~ObjectBuilder();
 	ObjectBuilder();
 
-	int    build( std::string path );
+	int	   build( std::string path );
 	Object getObject();
 };
 
 class Screen {
    private:
-	SDL_Event               e;
-	SDL_Window*             window;
-	SDL_Renderer*           renderer;
-	std::vector<vec3>       points;
+	SDL_Event				e;
+	SDL_Window*				window;
+	SDL_Renderer*			renderer;
+	std::vector<vec3>		points;
 	std::vector<Connection> lines;
 
 	bool _failed;
 
    public:
-	SDL_Event     getEvent();
-	SDL_Window*   getWindow();
+	SDL_Event	  getEvent();
+	SDL_Window*	  getWindow();
 	SDL_Renderer* getRenderer();
-	bool          getFailed();
+	bool		  getFailed();
 
-	std::vector<vec3>&       getPoints();
+	std::vector<vec3>&		 getPoints();
 	std::vector<Connection>& getLines();
 
 	Screen();
