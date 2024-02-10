@@ -18,11 +18,11 @@ void vec3::rotate( float x, float y, float z ) {
 	float z1 = this->z;
 
 	this->x =
-	    x1 * cos( y ) * cos( z ) - y1 * cos( y ) * sin( z ) + z1 * sin( y );
+		x1 * cos( y ) * cos( z ) - y1 * cos( y ) * sin( z ) + z1 * sin( y );
 	this->y = x1 * ( cos( x ) * sin( z ) + sin( x ) * sin( y ) * cos( z ) ) +
-	          y1 * ( cos( x ) * cos( z ) - sin( x ) * sin( y ) * sin( z ) ) -
-	          z1 * sin( x ) * cos( y );
+			  y1 * ( cos( x ) * cos( z ) - sin( x ) * sin( y ) * sin( z ) ) -
+			  z1 * sin( x ) * cos( y );
 	this->z = x1 * ( sin( x ) * sin( z ) - cos( x ) * sin( y ) * cos( z ) ) +
-	          y1 * ( sin( x ) * cos( z ) + cos( x ) * sin( y ) * sin( z ) ) +
-	          z1 * cos( x ) * cos( y );
+			  y1 * ( sin( x ) * cos( z ) + cos( x ) * sin( y ) * sin( z ) ) +
+			  z1 * cos( x ) * cos( y );
 }
