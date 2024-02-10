@@ -5,18 +5,18 @@ Screen::Screen() {
 	_failed = false;
 	if ( SDL_Init( SDL_INIT_VIDEO ) ) {
 		std::cout << "Screen initialisation failed : " << SDL_GetError()
-		          << " \n";
+				  << " \n";
 		_failed = true;
 	}
 	if ( SDL_CreateWindowAndRenderer( 640 * 2, 480 * 2, 0, &window,
-	                                  &renderer ) ) {
+									  &renderer ) ) {
 		std::cout << "Screen window initialisation failed : " << SDL_GetError()
-		          << " \n";
+				  << " \n";
 		_failed = true;
 	}
 	if ( SDL_RenderSetScale( renderer, 2, 2 ) ) {
 		std::cout << "Screen scale initialisation failed : " << SDL_GetError()
-		          << " \n";
+				  << " \n";
 		_failed = true;
 	}
 
@@ -53,7 +53,7 @@ void Screen::show() {
 
 	for ( Connection& c : lines )
 		SDL_RenderDrawLineF( renderer, points[c.a].x, points[c.a].y,
-		                     points[c.b].x, points[c.b].y );
+							 points[c.b].x, points[c.b].y );
 
 	SDL_RenderPresent( renderer );
 	// SDL_Delay(1000);
