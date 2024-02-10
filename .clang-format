@@ -11,5 +11,5 @@ SortUsingDeclarations: true
 SpaceBeforeAssignmentOperators: true
 SpacesInParentheses: true
 TabWidth: 4
-UseTab: ForIndentation
+UseTab: Always
 AlignAfterOpenBracket: Align
