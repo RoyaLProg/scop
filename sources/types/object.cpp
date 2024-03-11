@@ -10,7 +10,7 @@ std::vector<Connection>& Object::getLines() {
 	return lines;
 }
 
-std::vector<vec3>& Object::getTextureCoods() {
+std::vector<vec3>& Object::getTextureCoords() {
 	return textureCoods;
 }
 

@@ -31,7 +31,7 @@ class Object {
    public:
 	std::vector<vec3>&		 getPoints();
 	std::vector<Connection>& getLines();
-	std::vector<vec3>&		 getTextureCoods();
+	std::vector<vec3>&		 getTextureCoords();
 	std::vector<vec3>&		 getNormals();
 
 	Object();
@@ -42,7 +42,7 @@ class ObjectBuilder {
 
 	int addPoint( std::vector<std::string> args );
 	int addLine( std::vector<std::string> args );
-	int addTextureCood( std::vector<std::string> args );
+	int addTextureCoord( std::vector<std::string> args );
 	int addNormal( std::vector<std::string> args );
 
    public:
