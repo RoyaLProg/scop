@@ -4,6 +4,9 @@ OBJS_DIR=.obj
 SRCS_DIR=sources
 _SRCS=main.cpp\
 		types/connection.cpp\
+		types/matrix3.cpp\
+		types/object.cpp\
+		types/objectBuilder.cpp\
 		types/screen.cpp\
 		types/vec3.cpp
 _OBJS=$(_SRCS:.cpp=.o)

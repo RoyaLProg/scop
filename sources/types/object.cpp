@@ -3,17 +3,21 @@
 Object::Object() {}
 
 std::vector<vec3>& Object::getPoints() {
-	return points;
+	return _points;
 }
 
 std::vector<Connection>& Object::getLines() {
-	return lines;
+	return _lines;
 }
 
 std::vector<vec3>& Object::getTextureCoords() {
-	return textureCoods;
+	return _textureCoods;
 }
 
 std::vector<vec3>& Object::getNormals() {
-	return normals;
+	return _normals;
+}
+
+std::vector<Matrix3>& Object::getFaces() {
+	return _faces;
 }

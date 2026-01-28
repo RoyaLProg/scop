@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "../../includes/types.hpp"
 
 vec3::vec3() {
@@ -25,4 +26,18 @@ void vec3::rotate( float x, float y, float z ) {
 	this->z = x1 * ( sin( x ) * sin( z ) - cos( x ) * sin( y ) * cos( z ) ) +
 			  y1 * ( sin( x ) * cos( z ) + cos( x ) * sin( y ) * sin( z ) ) +
 			  z1 * cos( x ) * cos( y );
+}
+
+float& vec3::operator[]( std::size_t idx ) {
+	switch ( idx ) {
+		case 0:
+			return this->x;
+		case 1:
+			return this->y;
+		case 2:
+			return this->z;
+		default:
+			throw std::out_of_range(
+				"vector index cannot be negative or superior to 2" );
+	}
 }
